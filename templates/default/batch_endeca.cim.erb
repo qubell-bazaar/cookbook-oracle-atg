@@ -1,0 +1,44 @@
+//#GROOVY 1.0
+builder.cim {
+  task(atg.cim.productconfig.endeca.EndecaDeployConfigWriterTask) {
+    appName "CRS"
+    deploymentPath "<%= @apps_path %>"
+    baseDeploy "false"
+    eacPort "8888"
+    dgraphPort "15000"
+    authoringPort "15002"
+    logserverPort "15010"
+    casHost "localhost"
+    casPort "8500"
+    casPath "<%= @cas_path %>"
+    casJarVersion "11.1.0"
+    languageId "en"
+    host "localhost"
+    workbenchPort "8006"
+    workbenchEnabled "true"
+    productionAppServerHost "localhost"
+    productionAppServerPort "<%= node[:atg][:servers][:production][:port] %>"
+    previewHost "localhost"
+    previewPort "<%= node[:atg][:servers][:production][:port] %>"
+    previewContextRoot "crs"
+    userSegmentsHost "localhost"
+    userSegmentsPort "<%= node[:atg][:servers][:publishing][:port] %>"
+    jpsConfigFileLocation "<%= @tools_path %>/server/workspace/credential_store/jps-config.xml"
+    applicationConfigExportArchive "<%= @apps_path %>/CRS/data/workbench/application_export_archive"
+    baseDeployTemplateFile "<%= @atg_path %>/CIM/plugins/Base/filetemplate/endeca/deploy-prompt-basemodule.xml"
+    inputPath "<%= @atg_path %>/CIM/plugins/Base/filetemplate/endeca/deploy-prompt.xml"
+    outputPath "<%= @atg_path %>/CIM//data/tmp/deploy-prompt.xml"
+  }
+  task(atg.cim.productconfig.endeca.EndecaDeployTask) {
+    deployXMLPath "<%= @atg_path %>/CommerceReferenceStore/Store/Storefront/deploy/deploy.xml"
+    toolsAndFrameworksRootPath "<%= @tools_path %>"
+    endecaMDEXRootPath "<%= @mdex_path %>"
+    endecaPlatformServicesRootPath "<%= @platform_path %>"
+    promptXMLPath "<%= @atg_path %>/CIM/data/tmp/deploy-prompt.xml"
+  }
+  task(atg.cim.productconfig.endeca.EndecaInitializeTask) {
+    endecaAppRootPath "<%= @apps_path %>/CRS"
+    endecaMDEXRootPath "<%= @mdex_path %>"
+    endecaPlatformServicesRootPath "<%= @platform_path %>"
+  }
+}
