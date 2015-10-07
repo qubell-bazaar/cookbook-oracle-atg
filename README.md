@@ -1,1 +1,4 @@
-# cookbook-oracle-atg
+# atg
+
+TODO: Enter the cookbook description here.
+
