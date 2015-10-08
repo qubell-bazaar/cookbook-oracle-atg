@@ -3,6 +3,6 @@ wlst "shutdown ATGPublishing" do
   weblogic_home node[:weblogic][:weblogic_home]
   code <<-END
 connect('#{node[:weblogic][:username]}', '#{node[:weblogic][:password]}', 't3://#{node[:weblogic][:admin_console]}')
-start('#{node[:atg][:servers][:publishing][:name]}', 'Server', ignoreSessions='true', force='true')
+shutdown('#{node[:atg][:servers][:publishing][:name]}', 'Server', ignoreSessions='true', force='true')
   END
 end
