@@ -3,6 +3,9 @@ wlst "shutdown ATGProduction" do
   weblogic_home node[:weblogic][:weblogic_home]
   code <<-END
 connect('#{node[:weblogic][:username]}', '#{node[:weblogic][:password]}', 't3://#{node[:weblogic][:admin_console]}')
-shutdown('#{node[:atg][:servers][:production][:name]}', 'Server', ignoreSessions='true', force='true')
+try:
+  shutdown('#{node[:atg][:servers][:production][:name]}', 'Server', ignoreSessions='true', force='true')
+except:
+  pass
   END
 end
